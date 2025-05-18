@@ -26,6 +26,8 @@ public class Dot : MonoBehaviour
     public int previousColumn;
     public int previousRow;
 
+    private FindMatches findMatches;
+
     private bool isMoving = false;
     private float moveSpeed = 0.2f; // setting the speed of movement
 
@@ -33,6 +35,7 @@ public class Dot : MonoBehaviour
     void Start()
     {
         board = FindObjectOfType<Board>();
+        findMatches = FindObjectOfType<FindMatches>();
         //targetX = (int)transform.position.x;
         //targetY = (int)transform.position.y;
         //row = targetY;
@@ -56,7 +59,7 @@ public class Dot : MonoBehaviour
             {
                 board.allDots[column, row] = this.gameObject;
             }
-            FindMatches();
+            //FindMatches();
             if (isMatched)
             {
                 SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
@@ -75,6 +78,7 @@ public class Dot : MonoBehaviour
             {
                 board.allDots[column, row] = this.gameObject;
             }
+            findMatches.FindAllMatches();
         }
         else
         {
@@ -92,6 +96,7 @@ public class Dot : MonoBehaviour
             {
                 board.allDots[column, row] = this.gameObject;
             }
+            findMatches.FindAllMatches();
         }
         else
         {
