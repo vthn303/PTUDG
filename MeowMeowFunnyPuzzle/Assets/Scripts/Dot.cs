@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -26,6 +26,9 @@ public class Dot : MonoBehaviour
     public int previousColumn;
     public int previousRow;
 
+    private bool isMoving = false;
+    private float moveSpeed = 0.2f; // setting the speed of movement
+
 
     void Start()
     {
@@ -41,12 +44,26 @@ public class Dot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        FindMatches();
-        if (isMatched)
+        Vector2 targetPosition = new Vector2(targetX, targetY);
+        if (Vector2.Distance(transform.position, targetPosition) > 0.01f)
         {
-            SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
-            mySprite.color = new Color(1f, 1f, 1f, .2f);
+            transform.position = Vector2.Lerp(transform.position, targetPosition, 0.15f);
         }
+        else
+        {
+            transform.position = targetPosition;
+            if (board.allDots[column, row] != this.gameObject)
+            {
+                board.allDots[column, row] = this.gameObject;
+            }
+            FindMatches();
+            if (isMatched)
+            {
+                SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
+                mySprite.color = new Color(1f, 1f, 1f, .2f);
+            }
+        }
+
         targetX = column;
         targetY = row;
         if (Mathf.Abs(targetX - transform.position.x) > .1)
@@ -54,10 +71,10 @@ public class Dot : MonoBehaviour
             //Move Towards the target x position
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
-            if(board.allDots[column, row] != this.gameObject)
+            if (board.allDots[column, row] != this.gameObject)
             {
                 board.allDots[column, row] = this.gameObject;
-            } 
+            }
         }
         else
         {
@@ -71,7 +88,7 @@ public class Dot : MonoBehaviour
             //Move Towards the target y position
             tempPosition = new Vector2(transform.position.x, targetY);
             transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
-            if(board.allDots[column, row] != this.gameObject)
+            if (board.allDots[column, row] != this.gameObject)
             {
                 board.allDots[column, row] = this.gameObject;
             }

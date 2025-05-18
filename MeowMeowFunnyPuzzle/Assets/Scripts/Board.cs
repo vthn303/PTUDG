@@ -28,7 +28,7 @@ public class Board : MonoBehaviour
         {
             for(int j = 0; j < height; j++)
             {
-                Vector2 tempPosition = new Vector2(i, j);
+                Vector2 tempPosition = new Vector2(i, j + offSet);
                 GameObject backgroundTile =  Instantiate(tilePrefab, tempPosition, Quaternion.identity) as GameObject;
                 backgroundTile.transform.parent = this.transform;
                 backgroundTile.name = "( " + i + ", " +  j + " )";
@@ -41,7 +41,7 @@ public class Board : MonoBehaviour
                 }
                 maxInterations = 0;
                 GameObject dot = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity) as GameObject;
-                
+
                 dot.GetComponent<Dot>().row = j;
                 dot.GetComponent<Dot>().column = i;
                 dot.transform.parent = this.transform;
