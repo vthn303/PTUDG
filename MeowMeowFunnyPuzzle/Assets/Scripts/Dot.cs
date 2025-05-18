@@ -90,11 +90,12 @@ public class Dot : MonoBehaviour
                 column = previousColumn;
                 row = previousRow;
             }
-            otherDot = null;
-            //else
-            //{
-            //    board.DestroyMatches();
-            //}
+            else
+            {
+                board.DestroyMatches();
+            }
+
+        otherDot = null;
         }
     }
 
