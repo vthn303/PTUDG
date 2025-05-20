@@ -4,14 +4,15 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Cat1
+  - Cat2
+  - Cat3
+  - Cat4
+  - Cat5
+  - Cat6
+  - Cat7
+  - Cat8
   - Blue Dot
-  - Dark Green Dot
-  - Indigo Dot
-  - Orange Dot
-  - Pink Dot
-  - Purple Dot
-  - Red Dot
-  - Yellow Dot
   layers:
   - Default
   - TransparentFX

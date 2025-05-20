@@ -8,9 +8,13 @@ public class Dot : MonoBehaviour
     [Header("Board Variables")]
     private Vector2 firstTouchPosition;
     private Vector2 finalTouchPosition;
-    private GameObject otherDot;
+    public GameObject otherDot;
     private Board board;
     private Vector2 tempPosition;
+
+
+    [Header("Swipe Stuff")]
+
     public float swipeAngle = 0;
     public float swipeResist = 1f;
 
@@ -32,8 +36,21 @@ public class Dot : MonoBehaviour
     private float moveSpeed = 0.2f; // setting the speed of movement
 
 
+    [Header("Powerup Stuff")]
+    public bool isColumnBomb;
+    public bool isRowBomb;
+    public bool isColorBomb;
+    public GameObject rowArrow;
+    public GameObject columnArrow;
+    public GameObject colorBomb;
+
+
+
     void Start()
     {
+        isColumnBomb = false;
+        isRowBomb = false;
+
         board = FindObjectOfType<Board>();
         findMatches = FindObjectOfType<FindMatches>();
         //targetX = (int)transform.position.x;
@@ -44,9 +61,32 @@ public class Dot : MonoBehaviour
         //previousColumn = column;
     }
 
+
+    //test and debug bomb
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            isRowBomb = true;
+            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity) ;
+            arrow.transform.parent = this.transform;
+        }
+
+        
+    }
+
+
+
+
+
     // Update is called once per frame
     void Update()
     {
+        if (isMatched)
+        {
+            
+        }
+
         Vector2 targetPosition = new Vector2(targetX, targetY);
         if (Vector2.Distance(transform.position, targetPosition) > 0.01f)
         {
@@ -59,12 +99,12 @@ public class Dot : MonoBehaviour
             {
                 board.allDots[column, row] = this.gameObject;
             }
-            //FindMatches();
-            if (isMatched)
-            {
-                SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
-                mySprite.color = new Color(1f, 1f, 1f, .2f);
-            }
+            ////FindMatches();
+            //if (isMatched)
+            //{
+            //    SpriteRenderer mySprite = GetComponent<SpriteRenderer>();
+            //    mySprite.color = new Color(1f, 1f, 1f, .2f);
+            //}
         }
 
         targetX = column;
@@ -110,7 +150,17 @@ public class Dot : MonoBehaviour
 
     public IEnumerator CheckMoveCo()
     {
-        yield return new WaitForSeconds(.5f);
+        if (isColorBomb)
+        {
+            findMatches.MatchPiecesOfColor(otherDot.tag);
+            isMatched = true;
+
+        }else if (otherDot.GetComponent<Dot>().isColorBomb)
+        {
+            findMatches.MatchPiecesOfColor(this.gameObject.tag);
+            otherDot.GetComponent<Dot>().isMatched = true;
+        }
+            yield return new WaitForSeconds(.5f);
         if (otherDot != null)
         {
             if (!isMatched && !otherDot.GetComponent<Dot>().isMatched)
@@ -120,6 +170,7 @@ public class Dot : MonoBehaviour
                 column = previousColumn;
                 row = previousRow;
                 yield return new WaitForSeconds(.5f);
+                board.currentDot = null;
                 board.currentState = GameState.move;
             }
             else
@@ -128,7 +179,7 @@ public class Dot : MonoBehaviour
                 
             }
 
-        otherDot = null;
+       // otherDot = null;
         }
     }
 
@@ -157,6 +208,8 @@ public class Dot : MonoBehaviour
             swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x) * 180 / Mathf.PI;
             MovePieces();
             board.currentState = GameState.wait;
+            board.currentDot = this;
+
         }
         else
         {
@@ -242,6 +295,21 @@ public class Dot : MonoBehaviour
 
             
         }
+    }
+
+    public void MakeRowBomb()
+    {
+        isRowBomb = true;
+        GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity) ;
+        arrow.transform.parent = this.transform;
+
+    }
+
+    public void MakeColumnBomb()
+    {
+        isColumnBomb = true;
+        GameObject arrow = Instantiate(columnArrow, transform.position, Quaternion.identity) ;
+        arrow.transform.parent = this.transform;
     }
 
 }

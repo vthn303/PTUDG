@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11bb7f9f3eddae4eb40507203a28331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherDot: {fileID: 0}
   swipeAngle: 0
   swipeResist: 1
   column: 0
@@ -110,6 +111,12 @@ MonoBehaviour:
   isMatched: 0
   previousColumn: 0
   previousRow: 0
+  isColumnBomb: 0
+  isRowBomb: 0
+  isColorBomb: 0
+  rowArrow: {fileID: 3063244166460486487, guid: b353aa5bfb2cada4a9edbf0011cd16ca, type: 3}
+  columnArrow: {fileID: 8756362426953479519, guid: bff44e9e14062f54fbb69197c5cf42e9, type: 3}
+  colorBomb: {fileID: 3871478264867342451, guid: 26866446328d01742b4a9b2b8939d448, type: 3}
 --- !u!61 &490780116639885780
 BoxCollider2D:
   m_ObjectHideFlags: 0
