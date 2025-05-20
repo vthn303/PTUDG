@@ -152,7 +152,7 @@ public class Board : MonoBehaviour
             nullCount = 0;
 
         }
-        yield return new WaitForSeconds(.4f);
+        yield return new WaitForSeconds(.1f);
         StartCoroutine(FillBoard());
     }
 
@@ -202,15 +202,15 @@ public class Board : MonoBehaviour
     private IEnumerator FillBoard()
     {
         RefillBoard();
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
         while (MatchesOnBoard())
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.1f);
             DestroyMatches();
         }
         findMatches.currentMatches.Clear();
         currentDot = null;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.1f);
         currentState = GameState.move;
 
     }

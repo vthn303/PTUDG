@@ -71,9 +71,9 @@ public class Dot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            isAdjacentBomb = true;
-            GameObject marker = Instantiate(adjacentMarker, transform.position, Quaternion.identity) ;
-            marker.transform.parent = this.transform;
+            isRowBomb = true;
+            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity) ;
+            arrow.transform.parent = this.transform;
         }
 
         
@@ -151,17 +151,17 @@ public class Dot : MonoBehaviour
 
     public IEnumerator CheckMoveCo()
     {
-        if (isAdjacentBomb)
-        {
-            var adjacent = findMatches.GetAdjacentPieces(column, row);
-            foreach (var obj in adjacent)
-            {
-                if (obj != null)
-                    obj.GetComponent<Dot>().isMatched = true;
-            }
-            isMatched = true;
-        }
-        else if (isColorBomb)
+        //if (isAdjacentBomb)
+        //{
+        //    var adjacent = findMatches.GetAdjacentPieces(column, row);
+        //    foreach (var obj in adjacent)
+        //    {
+        //        if (obj != null)
+        //            obj.GetComponent<Dot>().isMatched = true;
+        //    }
+        //    isMatched = true;
+        //}
+        if (isColorBomb)
         {
             findMatches.MatchPiecesOfColor(otherDot.tag);
             isMatched = true;

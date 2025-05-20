@@ -94,7 +94,7 @@ public class FindMatches : MonoBehaviour
 
     private IEnumerator FindAllMatchesCo()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         for (int i = 0; i < board.width; i++)
         {
             for (int j = 0; j < board.height; j++)
@@ -217,7 +217,7 @@ public class FindMatches : MonoBehaviour
         List<GameObject> dots = new List<GameObject>();
         for (int i = 0; i < board.width; i++) 
         {
-            if (board.allDots[row, i] != null)
+            if (board.allDots[i, row] != null)
             {
                 dots.Add(board.allDots[i,row]);
                 board.allDots[i, row].GetComponent<Dot>().isMatched = true;
