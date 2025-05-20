@@ -1,4 +1,4 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -24,6 +24,7 @@ public class Board : MonoBehaviour
     private BackgroundTile[,] allTiles;
     public GameObject[] dots;
     public GameObject[,] allDots;
+    public GameObject destroyEffect;
 
     private FindMatches findMatches;
 
@@ -70,27 +71,10 @@ public class Board : MonoBehaviour
 
     private bool MatchesAt(int column, int row, GameObject piece)
     {
-        if (column > 1 && row > 1)
+        // Kiểm tra ngang
+        if (column > 1)
         {
-            if (allDots[column - 1, row].tag == piece.tag && allDots[column - 2, row].tag == piece.tag)
-            {
-                return true;
-            }
-            if (allDots[column, row - 1].tag == piece.tag && allDots[column, row - 2].tag == piece.tag)
-            {
-                return true;
-            }
-        }
-        else if (column <= 1 || row <= 1)
-        {
-            if (row > 1)
-            {
-                if (allDots[column, row - 1].tag == piece.tag && allDots[column, row - 2].tag == piece.tag)
-                {
-                    return true;
-                }
-            }
-            if (column > 1)
+            if (allDots[column - 1, row] != null && allDots[column - 2, row] != null)
             {
                 if (allDots[column - 1, row].tag == piece.tag && allDots[column - 2, row].tag == piece.tag)
                 {
@@ -98,14 +82,28 @@ public class Board : MonoBehaviour
                 }
             }
         }
-            return false;
+        // Kiểm tra dọc
+        if (row > 1)
+        {
+            if (allDots[column, row - 1] != null && allDots[column, row - 2] != null)
+            {
+                if (allDots[column, row - 1].tag == piece.tag && allDots[column, row - 2].tag == piece.tag)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
+
 
     private void DestroyMatchesAt(int column, int row)
     {
         if(allDots[column, row].GetComponent<Dot>().isMatched)
         {
             findMatches.currentMatches.Remove(allDots[column, row]);
+             GameObject particle = Instantiate(destroyEffect, allDots[column, row].transform.position, Quaternion.identity);
+            Destroy(particle, .5f); 
             Destroy(allDots[column, row]);
             allDots[column, row] = null;
         }
@@ -155,16 +153,22 @@ public class Board : MonoBehaviour
     {
         for (int i = 0; i < width; i++)
         {
-            for(int j = 0; j < height; j++)
+            for (int j = 0; j < height; j++)
             {
-                if(allDots[i, j] == null)
+                if (allDots[i, j] == null)
                 {
                     Vector2 tempPosition = new Vector2(i, j + offSet);
                     int dotToUse = Random.Range(0, dots.Length);
+                    int maxIterations = 0;
+                    while (MatchesAt(i, j, dots[dotToUse]) && maxIterations < 100)
+                    {
+                        dotToUse = Random.Range(0, dots.Length);
+                        maxIterations++;
+                    }
                     GameObject piece = Instantiate(dots[dotToUse], tempPosition, Quaternion.identity) as GameObject;
-                    allDots[i,j] = piece;
+                    allDots[i, j] = piece;
                     piece.GetComponent<Dot>().row = j;
-                    piece.GetComponent<Dot>().column = i; 
+                    piece.GetComponent<Dot>().column = i;
                 }
             }
         }

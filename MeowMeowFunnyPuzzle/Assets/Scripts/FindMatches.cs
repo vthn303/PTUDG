@@ -29,7 +29,7 @@ public class FindMatches : MonoBehaviour
                 {
 
                     {
-                        if (i > 0 && i < board.width - 1)
+                        if (i > 0 && i < board.width - 1) // check rows
                         {
                             GameObject leftDot = board.allDots[i - 1, j];
                             GameObject rightDot = board.allDots[i + 1, j];
@@ -57,7 +57,7 @@ public class FindMatches : MonoBehaviour
 
                         }
 
-                        if (j > 0 && j < board.width - 1)
+                        if (j > 0 && j < board.height - 1) // check columns
                         {
                             GameObject upDot = board.allDots[i, j+1];
                             GameObject downDot = board.allDots[i, j-1];
