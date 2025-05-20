@@ -40,9 +40,11 @@ public class Dot : MonoBehaviour
     public bool isColumnBomb;
     public bool isRowBomb;
     public bool isColorBomb;
+    public bool isAdjacentBomb;
     public GameObject rowArrow;
     public GameObject columnArrow;
     public GameObject colorBomb;
+    public GameObject adjacentMarker;
 
 
 
@@ -50,6 +52,8 @@ public class Dot : MonoBehaviour
     {
         isColumnBomb = false;
         isRowBomb = false;
+        isColorBomb = false;
+        isAdjacentBomb = false;
 
         board = FindObjectOfType<Board>();
         findMatches = FindObjectOfType<FindMatches>();
@@ -67,9 +71,9 @@ public class Dot : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            isRowBomb = true;
-            GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity) ;
-            arrow.transform.parent = this.transform;
+            isAdjacentBomb = true;
+            GameObject marker = Instantiate(adjacentMarker, transform.position, Quaternion.identity) ;
+            marker.transform.parent = this.transform;
         }
 
         
@@ -82,10 +86,7 @@ public class Dot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isMatched)
-        {
-            
-        }
+        
 
         Vector2 targetPosition = new Vector2(targetX, targetY);
         if (Vector2.Distance(transform.position, targetPosition) > 0.01f)
@@ -150,7 +151,17 @@ public class Dot : MonoBehaviour
 
     public IEnumerator CheckMoveCo()
     {
-        if (isColorBomb)
+        if (isAdjacentBomb)
+        {
+            var adjacent = findMatches.GetAdjacentPieces(column, row);
+            foreach (var obj in adjacent)
+            {
+                if (obj != null)
+                    obj.GetComponent<Dot>().isMatched = true;
+            }
+            isMatched = true;
+        }
+        else if (isColorBomb)
         {
             findMatches.MatchPiecesOfColor(otherDot.tag);
             isMatched = true;
