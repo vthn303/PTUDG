@@ -175,6 +175,8 @@ GameObject:
   - component: {fileID: 536438545}
   - component: {fileID: 536438544}
   - component: {fileID: 536438543}
+  - component: {fileID: 536438547}
+  - component: {fileID: 536438546}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -256,6 +258,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &536438546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536438542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfdc8ebcf62870418a06b8845cabd84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraOffset: -10
+  aspectRatio: 0.625
+  padding: 2
+--- !u!124 &536438547
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536438542}
+  m_Enabled: 1
 --- !u!1 &1139126761
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +293,7 @@ GameObject:
   - component: {fileID: 1139126762}
   - component: {fileID: 1139126764}
   - component: {fileID: 1139126765}
+  - component: {fileID: 1139126766}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -290,15 +316,37 @@ MonoBehaviour:
   currentState: 1
   width: 7
   height: 10
-  offSet: 20
+  offSet: 10
   tilePrefab: {fileID: 3174636737553267960, guid: fad2d807a2a5d0a4fb812f3d5aa8ff1e, type: 3}
+  breakableTilePrefab: {fileID: 6697131408819643136, guid: 837a2c9a4a0574349b6a84e2545d29b5, type: 3}
   dots:
   - {fileID: 1383893777960428483, guid: 5f853e4d6125b43449f836cbfe2e6fc2, type: 3}
   - {fileID: 1364584591137210144, guid: 157c20d8d02e1e54181a41f17a007819, type: 3}
   - {fileID: 652032001863089058, guid: 0a5d2bf6e1868d343af2340331a54cb4, type: 3}
   - {fileID: 141414995255498119, guid: 9c743b408a40b39428467ad1aa3e43fe, type: 3}
+  - {fileID: 2139158891545884870, guid: 887cdf476df5cfd4583d02c9aee9448f, type: 3}
   destroyParticle: {fileID: 7593204601583008373, guid: 3594d939ed8a84f40aa148318f42c904, type: 3}
+  boardLayout:
+  - x: 0
+    y: 0
+    tileKind: 1
+  - x: 5
+    y: 0
+    tileKind: 1
+  - x: 6
+    y: 7
+    tileKind: 1
+  - x: 0
+    y: 7
+    tileKind: 1
+  - x: 3
+    y: 3
+    tileKind: 1
+  - x: 3
+    y: 4
+    tileKind: 1
   currentDot: {fileID: 0}
+  hintManager: {fileID: 0}
 --- !u!4 &1139126763
 Transform:
   m_ObjectHideFlags: 0
@@ -342,6 +390,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentMatches: []
+--- !u!114 &1139126766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139126761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91e6aea441742a74793b85b1f51ef8ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hintDelay: 3
+  hintParticle: {fileID: 8754674904321998006, guid: 86b8d72461d022945a1c7ec6d01544e6, type: 3}
+  currentHint: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
