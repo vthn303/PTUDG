@@ -38,6 +38,7 @@ public class Board : MonoBehaviour {
     public GameObject[,] allDots;
     public Dot currentDot;
     private FindMatches findMatches;
+    public HintManager hintManager;
 
 
 
@@ -417,7 +418,7 @@ public class Board : MonoBehaviour {
         return false;
     }
 
-    private bool SwitchAndCheck(int column, int row, Vector2 direction)
+    public bool SwitchAndCheck(int column, int row, Vector2 direction)
     {
         SwitchPieces(column, row, direction);
         if (CheckForMatches())
@@ -431,25 +432,39 @@ public class Board : MonoBehaviour {
 
     private bool IsDeadlocked()
     {
-        for(int i = 0; i < width; i++)
+        if (hintManager != null)
         {
-            for(int j = 0; j < height; j++)
+            hintManager.DestroyHint();
+        }
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
             {
-                if (allDots[i,j] != null)
+                if (allDots[i, j] != null)
                 {
-                    if(i < width - 1)
+                    if (i < width - 1)
                     {
-                        if(SwitchAndCheck(i, j, Vector2.right))
+                        if (allDots[i + 1, j] != null)
                         {
-                            return false;
+                            if (SwitchAndCheck(i, j, Vector2.right))
+                            {
+                                return false;
+                            }
                         }
                     }
-                    if(j < height - 1)
+                    if (j < height - 1)
                     {
-                        if(SwitchAndCheck(i, j, Vector2.up))
+                        if (allDots[i, j + 1] != null)
                         {
-                            return false;
+                            if (SwitchAndCheck(i, j, Vector2.up))
+                            {
+                                return false;
+                            }
                         }
+                    }
+                    if (allDots[i, j].GetComponent<Dot>().isColorBomb)
+                    {
+                        return false;
                     }
                 }
             }
