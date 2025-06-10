@@ -1,10 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
-public class Dot : MonoBehaviour
-{
+public class Dot : MonoBehaviour {
 
     [Header("Board Variables")]
     public int column;
@@ -38,9 +36,8 @@ public class Dot : MonoBehaviour
     public GameObject colorBomb;
 
 
-    // Use this for initialization
-    void Start()
-    {
+	// Use this for initialization
+	void Start () {
 
         isColumnBomb = false;
         isRowBomb = false;
@@ -56,14 +53,13 @@ public class Dot : MonoBehaviour
         //previousRow = row;
         //previousColumn = column;
 
-    }
+	}
 
 
     //This is for testing and Debug only.
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(1))
-        {
+        if(Input.GetMouseButtonDown(1)){
             isAdjacentBomb = true;
             GameObject marker = Instantiate(adjacentMarker, transform.position, Quaternion.identity);
             marker.transform.parent = this.transform;
@@ -72,8 +68,7 @@ public class Dot : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update () {
         /*
         if(isMatched){
             
@@ -84,21 +79,17 @@ public class Dot : MonoBehaviour
         */
         targetX = column;
         targetY = row;
-        if (Mathf.Abs(targetX - transform.position.x) > .1)
-        {
+        if (Mathf.Abs(targetX - transform.position.x) > .1){
             //Move Towards the target
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
-            if (board.allDots[column, row] != this.gameObject)
-            {
+            if(board.allDots[column, row] != this.gameObject){
                 board.allDots[column, row] = this.gameObject;
             }
             findMatches.FindAllMatches();
 
 
-        }
-        else
-        {
+        }else{
             //Directly set the position
             tempPosition = new Vector2(targetX, transform.position.y);
             transform.position = tempPosition;
@@ -123,27 +114,21 @@ public class Dot : MonoBehaviour
             transform.position = tempPosition;
 
         }
-    }
+	}
 
-    public IEnumerator CheckMoveCo()
-    {
-        if (isColorBomb)
-        {
+    public IEnumerator CheckMoveCo(){
+        if(isColorBomb){
             //This piece is a color bomb, and the other piece is the color to destroy
             findMatches.MatchPiecesOfColor(otherDot.tag);
             isMatched = true;
-        }
-        else if (otherDot.GetComponent<Dot>().isColorBomb)
-        {
+        }else if(otherDot.GetComponent<Dot>().isColorBomb){
             //The other piece is a color bomb, and this piece has the color to destroy
             findMatches.MatchPiecesOfColor(this.gameObject.tag);
             otherDot.GetComponent<Dot>().isMatched = true;
         }
         yield return new WaitForSeconds(.5f);
-        if (otherDot != null)
-        {
-            if (!isMatched && !otherDot.GetComponent<Dot>().isMatched)
-            {
+        if(otherDot != null){
+            if(!isMatched && !otherDot.GetComponent<Dot>().isMatched){
                 otherDot.GetComponent<Dot>().row = row;
                 otherDot.GetComponent<Dot>().column = column;
                 row = previousRow;
@@ -151,9 +136,7 @@ public class Dot : MonoBehaviour
                 yield return new WaitForSeconds(.5f);
                 board.currentDot = null;
                 board.currentState = GameState.move;
-            }
-            else
-            {
+            }else{
                 board.DestroyMatches();
 
             }
@@ -179,109 +162,102 @@ public class Dot : MonoBehaviour
         }
     }
 
-    void CalculateAngle()
-    {
+    void CalculateAngle(){
         if (Mathf.Abs(finalTouchPosition.y - firstTouchPosition.y) > swipeResist || Mathf.Abs(finalTouchPosition.x - firstTouchPosition.x) > swipeResist)
         {
             board.currentState = GameState.wait;
             swipeAngle = Mathf.Atan2(finalTouchPosition.y - firstTouchPosition.y, finalTouchPosition.x - firstTouchPosition.x) * 180 / Mathf.PI;
             MovePieces();
+
             board.currentDot = this;
 
-        }
-        else
-        {
+        }else{
             board.currentState = GameState.move;
 
         }
     }
 
-    void MovePiecesActual(Vector2 direction)
-    {
-        otherDot = board.allDots[column +(int) direction.x, row +(int) direction.y];
+    void MovePiecesActual(Vector2 direction){
+        otherDot = board.allDots[column + (int)direction.x, row + (int)direction.y];
         previousRow = row;
         previousColumn = column;
-        otherDot.GetComponent<Dot>().column += -1 * (int) direction.x;
-        otherDot.GetComponent<Dot>().row += -1 * (int)direction.y;
-
-
-        column += (int) direction.x;
-        row += (int)direction.y;
-        StartCoroutine(CheckMoveCo());
-
+		if (otherDot != null)
+		{
+			otherDot.GetComponent<Dot>().column += -1 * (int)direction.x;
+			otherDot.GetComponent<Dot>().row += -1 * (int)direction.y;
+			column += (int)direction.x;
+			row += (int)direction.y;
+			StartCoroutine(CheckMoveCo());
+		}else{
+			board.currentState = GameState.move;
+		}
     }
 
-
-    void MovePieces()
-    {
+    void MovePieces(){
         if (swipeAngle > -45 && swipeAngle <= 45 && column < board.width - 1)
         {
             //Right Swipe
-            //otherDot = board.allDots[column + 1, row];
-            //previousRow = row;
-            //previousColumn = column;
-            //otherDot.GetComponent<Dot>().column -= 1;
-            //column += 1;
-            //StartCoroutine(CheckMoveCo());
-
+            /*
+            otherDot = board.allDots[column + 1, row];
+            previousRow = row;
+            previousColumn = column;
+            otherDot.GetComponent<Dot>().column -=1;
+            column += 1;
+            StartCoroutine(CheckMoveCo());
+            */
             MovePiecesActual(Vector2.right);
-
-
         }
         else if (swipeAngle > 45 && swipeAngle <= 135 && row < board.height - 1)
         {
             //Up Swipe
-            //otherDot = board.allDots[column, row + 1];
-            //previousRow = row;
-            //previousColumn = column;
-            //otherDot.GetComponent<Dot>().row -= 1;
-            //row += 1;
-            //StartCoroutine(CheckMoveCo());
-
+            /*
+            otherDot = board.allDots[column, row + 1];
+            previousRow = row;
+            previousColumn = column;
+            otherDot.GetComponent<Dot>().row -=1;
+            row += 1;
+            StartCoroutine(CheckMoveCo());
+            */
             MovePiecesActual(Vector2.up);
-
-
         }
         else if ((swipeAngle > 135 || swipeAngle <= -135) && column > 0)
         {
             //Left Swipe
-            //otherDot = board.allDots[column - 1, row];
-            //previousRow = row;
-            //previousColumn = column;
-            //otherDot.GetComponent<Dot>().column += 1;
-            //column -= 1;
-            //StartCoroutine(CheckMoveCo());
+            /*
+            otherDot = board.allDots[column - 1, row];
+            previousRow = row;
+            previousColumn = column;
+            otherDot.GetComponent<Dot>().column +=1;
+            column -= 1;
+            StartCoroutine(CheckMoveCo());
+            */
             MovePiecesActual(Vector2.left);
-
         }
         else if (swipeAngle < -45 && swipeAngle >= -135 && row > 0)
         {
             //Down Swipe
-            //otherDot = board.allDots[column, row - 1];
-            //previousRow = row;
-            //previousColumn = column;
-            //otherDot.GetComponent<Dot>().row += 1;
-            //row -= 1;
-            //StartCoroutine(CheckMoveCo());
-
+            /*
+            otherDot = board.allDots[column, row - 1];
+            previousRow = row;
+            previousColumn = column;
+            otherDot.GetComponent<Dot>().row +=1;
+            row -= 1;
+            StartCoroutine(CheckMoveCo());
+            */
             MovePiecesActual(Vector2.down);
-
         }
         else
         {
-            board.currentState = GameState.move;
 
+            board.currentState = GameState.move;
         }
 
 
-        
 
     }
 
-    void FindMatches()
-    {
-        if (column > 0 && column < board.width - 1)
-        {
+    void FindMatches(){
+        if(column > 0 && column < board.width - 1){
             GameObject leftDot1 = board.allDots[column - 1, row];
             GameObject rightDot1 = board.allDots[column + 1, row];
             if (leftDot1 != null && rightDot1 != null)
@@ -311,29 +287,25 @@ public class Dot : MonoBehaviour
 
     }
 
-    public void MakeRowBomb()
-    {
+    public void MakeRowBomb(){
         isRowBomb = true;
         GameObject arrow = Instantiate(rowArrow, transform.position, Quaternion.identity);
         arrow.transform.parent = this.transform;
     }
 
-    public void MakeColumnBomb()
-    {
+    public void MakeColumnBomb(){
         isColumnBomb = true;
         GameObject arrow = Instantiate(columnArrow, transform.position, Quaternion.identity);
         arrow.transform.parent = this.transform;
     }
 
-    public void MakeColorBomb()
-    {
+    public void MakeColorBomb(){
         isColorBomb = true;
         GameObject color = Instantiate(colorBomb, transform.position, Quaternion.identity);
         color.transform.parent = this.transform;
     }
 
-    public void MakeAdjacentBomb()
-    {
+    public void MakeAdjacentBomb(){
         isAdjacentBomb = true;
         GameObject marker = Instantiate(adjacentMarker, transform.position, Quaternion.identity);
         marker.transform.parent = this.transform;

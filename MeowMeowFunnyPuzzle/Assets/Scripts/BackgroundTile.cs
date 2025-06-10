@@ -1,22 +1,36 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class BackgroundTile : MonoBehaviour
-{
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+
+public class BackgroundTile : MonoBehaviour {
+    public int hitPoints;
+    private SpriteRenderer sprite;
+
+    private void Start()
     {
-        Initialized();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if (hitPoints <= 0) {
+            Destroy(this.gameObject);
+        }
     }
 
-    void Initialized()
+    public void TakeDamage(int damage)
     {
-       
+        hitPoints -= damage;
+        MakeLighter();
     }
+
+    void MakeLighter()
+    {
+        Color color = sprite.color;
+        float newAlpha = color.a * .5f;
+        sprite.color = new Color(color.r, color.g, color.b, newAlpha);
+    }
+
 }

@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1504987830753744633, guid: 6c03bdbcb14615b459f8bcd54f44ff89, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -101,24 +101,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f11bb7f9f3eddae4eb40507203a28331, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherDot: {fileID: 0}
-  swipeAngle: 0
-  swipeResist: 1
   column: 0
   row: 0
+  previousColumn: 0
+  previousRow: 0
   targetX: 0
   targetY: 0
   isMatched: 0
-  previousColumn: 0
-  previousRow: 0
+  otherDot: {fileID: 0}
+  swipeAngle: 0
+  swipeResist: 1
+  isColorBomb: 0
   isColumnBomb: 0
   isRowBomb: 0
-  isColorBomb: 0
   isAdjacentBomb: 0
+  adjacentMarker: {fileID: 7271696004662900657, guid: 6a1ea1753b7e0c344820f2a8564b6a94, type: 3}
   rowArrow: {fileID: 3063244166460486487, guid: b353aa5bfb2cada4a9edbf0011cd16ca, type: 3}
   columnArrow: {fileID: 8756362426953479519, guid: bff44e9e14062f54fbb69197c5cf42e9, type: 3}
   colorBomb: {fileID: 3871478264867342451, guid: 26866446328d01742b4a9b2b8939d448, type: 3}
-  adjacentMarker: {fileID: 7271696004662900657, guid: 6a1ea1753b7e0c344820f2a8564b6a94, type: 3}
 --- !u!61 &490780116639885780
 BoxCollider2D:
   m_ObjectHideFlags: 0
