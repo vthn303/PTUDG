@@ -13,6 +13,7 @@ TagManager:
   - Cat7
   - Cat8
   - Blue Dot
+  - Color
   layers:
   - Default
   - TransparentFX
