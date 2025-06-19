@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI; 
 
 
@@ -40,10 +40,15 @@ public class EndGameManager : MonoBehaviour
     {
         if(board.world != null)
         {
-            if (board.world.levels[board.level] != null)
+            if (board.level < board.world.levels.Length)
             {
-                requirements = board.world.levels[board.level].endGameRequirements;
+                if (board.world.levels[board.level] != null)
+                {
+                    requirements = board.world.levels[board.level].endGameRequirements;
+                }
             }
+
+                
         }
     }
 
