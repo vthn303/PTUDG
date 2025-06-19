@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8135fefb5af8e4eb2231c3900cec8e, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  width: 7
+  height: 7
+  boardLayout: []
+  dots:
+  - {fileID: 1383893777960428483, guid: 5f853e4d6125b43449f836cbfe2e6fc2, type: 3}
+  - {fileID: 1364584591137210144, guid: 157c20d8d02e1e54181a41f17a007819, type: 3}
+  - {fileID: 652032001863089058, guid: 0a5d2bf6e1868d343af2340331a54cb4, type: 3}
+  - {fileID: 141414995255498119, guid: 9c743b408a40b39428467ad1aa3e43fe, type: 3}
+  scoreGoals: 640000009001000058020000
+  endGameRequirements:
+    gameType: 0
+    couterValue: 60
+  levelGoals:
+  - numberNeeded: 10
+    numberCollected: 0
+    goalSprite: {fileID: 597123410977682917, guid: 6c6c69debc241524c9db59d5a67d8914, type: 3}
+    matchValue: Cat1

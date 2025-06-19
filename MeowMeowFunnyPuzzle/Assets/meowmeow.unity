@@ -1885,6 +1885,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1876b5992a27fc4ca79984bc5b3ffa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  world: {fileID: 11400000, guid: 9080c17f5a3176044b9c13fa243d0968, type: 2}
+  level: 2
   currentState: 1
   width: 7
   height: 10
@@ -1898,25 +1900,7 @@ MonoBehaviour:
   - {fileID: 141414995255498119, guid: 9c743b408a40b39428467ad1aa3e43fe, type: 3}
   - {fileID: 2139158891545884870, guid: 887cdf476df5cfd4583d02c9aee9448f, type: 3}
   destroyParticle: {fileID: 7593204601583008373, guid: 3594d939ed8a84f40aa148318f42c904, type: 3}
-  boardLayout:
-  - x: 0
-    y: 0
-    tileKind: 0
-  - x: 5
-    y: 0
-    tileKind: 0
-  - x: 6
-    y: 7
-    tileKind: 1
-  - x: 0
-    y: 7
-    tileKind: 1
-  - x: 3
-    y: 3
-    tileKind: 1
-  - x: 3
-    y: 4
-    tileKind: 1
+  boardLayout: []
   currentDot: {fileID: 0}
   hintManager: {fileID: 0}
   basePieceValue: 20

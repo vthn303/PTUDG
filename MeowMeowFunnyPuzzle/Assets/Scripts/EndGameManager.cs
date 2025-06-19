@@ -19,6 +19,7 @@ public class EndGameRequirements
 
 public class EndGameManager : MonoBehaviour
 {
+
     public EndGameRequirements requirements;
     public GameObject movesLabel, timeLabel;
     public GameObject youWinPanel;
@@ -31,8 +32,19 @@ public class EndGameManager : MonoBehaviour
     void Start()
     {
         board = FindObjectOfType<Board>();
+        SetGameType();
         SetupGame();
         
+    }
+    void SetGameType()
+    {
+        if(board.world != null)
+        {
+            if (board.world.levels[board.level] != null)
+            {
+                requirements = board.world.levels[board.level].endGameRequirements;
+            }
+        }
     }
 
     void SetupGame()

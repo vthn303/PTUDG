@@ -20,12 +20,29 @@ public class GoalManager : MonoBehaviour
     public GameObject goalPrefab;
     public GameObject goalIntroParent;
     public GameObject goalGameParent;
+    private Board board;
     private EndGameManager endGame;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        board = FindObjectOfType<Board>();
         endGame = FindObjectOfType<EndGameManager>();
+        GetGoals();
         SetupGoals();
+    }
+
+    void GetGoals()
+    {
+        if(board != null)
+        {
+            if(board.world != null)
+            {
+                if (board.world.levels[board.level]!= null)
+                {
+                    levelGoals = board.world.levels[board.level].levelGoals;
+                }
+            }
+        }
     }
     void SetupGoals()
     {
