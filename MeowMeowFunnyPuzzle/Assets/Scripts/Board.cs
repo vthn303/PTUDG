@@ -4,7 +4,10 @@ using UnityEngine;
 
 public enum GameState{
     wait,
-    move
+    move,
+    win,
+    lose,
+    pause
 }
 
 public enum TileKind
@@ -43,6 +46,7 @@ public class Board : MonoBehaviour {
     public int streakValue = 1;
     private ScoreManager scoreManager;
     private SoundManager soundManager;
+    private GoalManager goalManager;
     public float refillDelay = 0.5f;
     public int[] scoreGoals;
 
@@ -50,6 +54,7 @@ public class Board : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        goalManager = FindObjectOfType<GoalManager>();
         soundManager = FindObjectOfType<SoundManager>();
         scoreManager = FindObjectOfType<ScoreManager>();
         breakableTiles = new BackgroundTile[width, height]; ;
@@ -57,6 +62,7 @@ public class Board : MonoBehaviour {
 		blankSpaces = new bool[width, height];
         allDots = new GameObject[width, height];
         SetUp();
+        currentState = GameState.pause;
 	}
 
 	public void GenerateBlankSpaces(){
@@ -261,6 +267,12 @@ public class Board : MonoBehaviour {
                 {
                     breakableTiles[column, row] = null;
                 }
+            }
+
+            if(goalManager != null)
+            {
+                goalManager.CompareGoal(allDots[column, row].tag.ToString());
+                goalManager.UpdateGoals();
             }
             if(soundManager != null)
             {

@@ -14,6 +14,7 @@ TagManager:
   - Cat8
   - Blue Dot
   - Color
+  - Breakable
   layers:
   - Default
   - TransparentFX
