@@ -17,19 +17,19 @@ MonoBehaviour:
   boardLayout:
   - x: 0
     y: 0
-    tileKind: 0
+    tileKind: 2
   - x: 2
     y: 2
-    tileKind: 0
+    tileKind: 2
   - x: 1
     y: 5
-    tileKind: 0
+    tileKind: 2
   - x: 4
     y: 6
     tileKind: 0
   - x: 5
     y: 7
-    tileKind: 0
+    tileKind: 2
   dots:
   - {fileID: 652032001863089058, guid: 0a5d2bf6e1868d343af2340331a54cb4, type: 3}
   - {fileID: 141414995255498119, guid: 9c743b408a40b39428467ad1aa3e43fe, type: 3}
@@ -42,7 +42,7 @@ MonoBehaviour:
     couterValue: 100
   levelGoals:
   - numberNeeded: 2
-    numberCollected: 0
+    numberCollected: 3
     goalSprite: {fileID: 268603036911594676, guid: 009a4a7009781414c8c67d86a7709567, type: 3}
     matchValue: Cat3
   - numberNeeded: 5

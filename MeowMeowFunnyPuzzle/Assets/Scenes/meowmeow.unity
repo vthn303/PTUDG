@@ -1886,13 +1886,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   world: {fileID: 11400000, guid: 9080c17f5a3176044b9c13fa243d0968, type: 2}
-  level: 2
+  level: 0
   currentState: 1
   width: 7
   height: 10
   offSet: 10
   tilePrefab: {fileID: 3174636737553267960, guid: fad2d807a2a5d0a4fb812f3d5aa8ff1e, type: 3}
   breakableTilePrefab: {fileID: 6697131408819643136, guid: 837a2c9a4a0574349b6a84e2545d29b5, type: 3}
+  lockTilePrefab: {fileID: 8769640585956114464, guid: ef8795b8b9b1d2247907909c6a1b9fb0, type: 3}
   dots:
   - {fileID: 1383893777960428483, guid: 5f853e4d6125b43449f836cbfe2e6fc2, type: 3}
   - {fileID: 1364584591137210144, guid: 157c20d8d02e1e54181a41f17a007819, type: 3}
@@ -1901,6 +1902,9 @@ MonoBehaviour:
   - {fileID: 2139158891545884870, guid: 887cdf476df5cfd4583d02c9aee9448f, type: 3}
   destroyParticle: {fileID: 7593204601583008373, guid: 3594d939ed8a84f40aa148318f42c904, type: 3}
   boardLayout: []
+  matchType:
+    type: 0
+    color: 
   currentDot: {fileID: 0}
   hintManager: {fileID: 0}
   basePieceValue: 20

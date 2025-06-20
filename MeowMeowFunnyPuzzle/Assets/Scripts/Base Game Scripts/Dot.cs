@@ -18,8 +18,8 @@ public class Dot : MonoBehaviour {
     private FindMatches findMatches;
     private Board board;
     public GameObject otherDot;
-    private Vector2 firstTouchPosition;
-    private Vector2 finalTouchPosition;
+    private Vector2 firstTouchPosition = Vector2.zero;
+    private Vector2 finalTouchPosition = Vector2.zero;
     private Vector2 tempPosition;
 
     [Header("Swipe Stuff")]
@@ -89,9 +89,9 @@ public class Dot : MonoBehaviour {
             transform.position = Vector2.Lerp(transform.position, tempPosition, .6f);
             if(board.allDots[column, row] != this.gameObject){
                 board.allDots[column, row] = this.gameObject;
-            }
-            findMatches.FindAllMatches();
+                findMatches.FindAllMatches();
 
+            }
 
         }else{
             //Directly set the position
@@ -107,8 +107,9 @@ public class Dot : MonoBehaviour {
             if (board.allDots[column, row] != this.gameObject)
             {
                 board.allDots[column, row] = this.gameObject;
+                findMatches.FindAllMatches();
+
             }
-            findMatches.FindAllMatches();
 
         }
         else
@@ -195,16 +196,26 @@ public class Dot : MonoBehaviour {
         otherDot = board.allDots[column + (int)direction.x, row + (int)direction.y];
         previousRow = row;
         previousColumn = column;
-		if (otherDot != null)
-		{
-			otherDot.GetComponent<Dot>().column += -1 * (int)direction.x;
-			otherDot.GetComponent<Dot>().row += -1 * (int)direction.y;
-			column += (int)direction.x;
-			row += (int)direction.y;
-			StartCoroutine(CheckMoveCo());
-		}else{
-			board.currentState = GameState.move;
-		}
+        if (board.lockTiles[column, row] == null && board.lockTiles[column + (int)direction.x, row + (int)direction.y] == null)
+        {
+            if (otherDot != null)
+            {
+                otherDot.GetComponent<Dot>().column += -1 * (int)direction.x;
+                otherDot.GetComponent<Dot>().row += -1 * (int)direction.y;
+                column += (int)direction.x;
+                row += (int)direction.y;
+                StartCoroutine(CheckMoveCo());
+            }
+            else
+            {
+                board.currentState = GameState.move;
+            }
+        }
+        else
+        {
+            board.currentState = GameState.move;
+        }
+
     }
 
     void MovePieces(){
