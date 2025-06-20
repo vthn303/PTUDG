@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: a3697ccce08943940ae540699d810b5e
+guid: d227703dd5eaa854ea152ba30ce77d3e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2794282866675623914
-    second: Adjacent Cat_0
+      213: 3385077523316791626
+    second: Adjacent Cat 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Adjacent Cat_0
+      name: Adjacent Cat 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 618d6d99986b839d0800000000000000
-      internalID: -2794282866675623914
+      spriteID: a49d47292163afe20800000000000000
+      internalID: 3385077523316791626
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Adjacent Cat_0: -2794282866675623914
+      Adjacent Cat 1_0: 3385077523316791626
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

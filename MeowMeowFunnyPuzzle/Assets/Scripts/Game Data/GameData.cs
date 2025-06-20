@@ -64,9 +64,10 @@ public class GameData : MonoBehaviour
 
     public void Load()
     {
+        //check the save game file exists
         if (File.Exists(Application.persistentDataPath + "/player.dat"))
         {
-            // load như cũ
+            //create a binary formatter
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/player.dat", FileMode.Open);
             saveData = formatter.Deserialize(file) as SaveData;
@@ -75,27 +76,19 @@ public class GameData : MonoBehaviour
         }
         else
         {
-            // KHỞI TẠO DỮ LIỆU MẶC ĐỊNH
             saveData = new SaveData();
-            int levelCount = 10; // Số lượng level bạn mong muốn, chỉnh lại cho đúng
-            saveData.isActive = new bool[levelCount];
-            saveData.highScores = new int[levelCount];
-            saveData.stars = new int[levelCount];
-
-            // Ví dụ: chỉ mở khóa level 1
+            saveData.isActive = new bool[100];
+            saveData.stars = new int[100];
+            saveData.highScores = new int[100];
             saveData.isActive[0] = true;
-            for (int i = 1; i < levelCount; i++)
-                saveData.isActive[i] = false;
-            for (int i = 0; i < levelCount; i++)
-            {
-                saveData.highScores[i] = 0;
-                saveData.stars[i] = 0;
-            }
-            Debug.Log("Khởi tạo SaveData mặc định");
-            Save(); // Lưu lại file mới luôn
         }
+
     }
 
+    private void OnApplicationQuit()
+    {
+        Save();
+    }
 
     private void OnDisable()
     {
