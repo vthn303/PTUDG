@@ -12,24 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8135fefb5af8e4eb2231c3900cec8e, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
-  width: 6
-  height: 8
+  width: 8
+  height: 9
   boardLayout:
-  - x: 0
-    y: 0
-    tileKind: 2
-  - x: 2
-    y: 2
-    tileKind: 2
-  - x: 1
-    y: 5
-    tileKind: 2
+  - x: 3
+    y: 3
+    tileKind: 3
+  - x: 3
+    y: 4
+    tileKind: 3
   - x: 4
-    y: 6
-    tileKind: 0
-  - x: 5
-    y: 7
-    tileKind: 2
+    y: 3
+    tileKind: 3
+  - x: 4
+    y: 4
+    tileKind: 3
   dots:
   - {fileID: 652032001863089058, guid: 0a5d2bf6e1868d343af2340331a54cb4, type: 3}
   - {fileID: 141414995255498119, guid: 9c743b408a40b39428467ad1aa3e43fe, type: 3}
@@ -42,10 +39,10 @@ MonoBehaviour:
     couterValue: 100
   levelGoals:
   - numberNeeded: 2
-    numberCollected: 3
+    numberCollected: 0
     goalSprite: {fileID: 268603036911594676, guid: 009a4a7009781414c8c67d86a7709567, type: 3}
     matchValue: Cat3
   - numberNeeded: 5
-    numberCollected: 0
+    numberCollected: 4
     goalSprite: {fileID: 2848517285599912367, guid: 7bca24b0223cd1d44b713ba0f91ce833, type: 3}
     matchValue: Breakable

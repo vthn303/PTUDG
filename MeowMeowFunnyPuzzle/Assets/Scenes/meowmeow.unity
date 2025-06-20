@@ -1894,6 +1894,7 @@ MonoBehaviour:
   tilePrefab: {fileID: 3174636737553267960, guid: fad2d807a2a5d0a4fb812f3d5aa8ff1e, type: 3}
   breakableTilePrefab: {fileID: 6697131408819643136, guid: 837a2c9a4a0574349b6a84e2545d29b5, type: 3}
   lockTilePrefab: {fileID: 8769640585956114464, guid: ef8795b8b9b1d2247907909c6a1b9fb0, type: 3}
+  concreteTilePrefab: {fileID: 4040425335360088090, guid: f6971d64b8d073c4f816322d0dbae7aa, type: 3}
   dots:
   - {fileID: 1383893777960428483, guid: 5f853e4d6125b43449f836cbfe2e6fc2, type: 3}
   - {fileID: 1364584591137210144, guid: 157c20d8d02e1e54181a41f17a007819, type: 3}
