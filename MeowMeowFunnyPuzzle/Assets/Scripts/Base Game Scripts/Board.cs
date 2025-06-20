@@ -389,6 +389,44 @@ public class Board : MonoBehaviour {
         }
     }
 
+    public void BombRow(int row)
+    {
+        for(int i = 0; i < width; i++)
+        {
+            for(int j = 0; j<height; j++)
+            {
+                if (concreteTiles[i, j])
+                {
+                    concreteTiles[i, row].TakeDamage(1);
+                    if (concreteTiles[i, row].hitPoints <= 0)
+                    {
+                        concreteTiles[i, row] = null;
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void BombColumn(int column)
+    {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                if (concreteTiles[i, j])
+                {
+                    concreteTiles[column, i].TakeDamage(1);
+                    if (concreteTiles[column, i].hitPoints <= 0)
+                    {
+                        concreteTiles[column, i] = null;
+                    }
+
+                }
+            }
+        }
+    }
+
     private void DestroyMatchesAt(int column, int row){
         if(allDots[column, row].GetComponent<Dot>().isMatched){
           
@@ -508,7 +546,7 @@ public class Board : MonoBehaviour {
 			for (int j = 0; j < height; j ++)
 			{
 				//if the current spot isn't blank and is empty. . . 
-				if(!blankSpaces[i,j] && allDots[i,j] == null)
+				if(!blankSpaces[i,j] && allDots[i,j] == null && !concreteTiles[i,j])
 				{
 					//loop from the space above to the top of the column
 					for (int k = j + 1; k < height; k ++)
@@ -613,9 +651,12 @@ public class Board : MonoBehaviour {
 
     private void SwitchPieces(int column, int row, Vector2 direction)
     {
-        GameObject holder = allDots[column + (int)direction.x, row + (int)direction.y] as GameObject;
-        allDots[column + (int)direction.x, row + (int)direction.y] = allDots[column, row];
-        allDots[column,row] = holder;
+        if (allDots[column + (int)direction.x, row + (int)direction.y] != null)
+        {
+            GameObject holder = allDots[column + (int)direction.x, row + (int)direction.y] as GameObject;
+            allDots[column + (int)direction.x, row + (int)direction.y] = allDots[column, row];
+            allDots[column, row] = holder;
+        }
     }
 
     private bool CheckForMatches()
@@ -727,7 +768,7 @@ public class Board : MonoBehaviour {
         {
             for(int j = 0; j<height; j++)
             {
-                if (!blankSpaces[i, j])
+                if (!blankSpaces[i, j] && !concreteTiles[i,j])
                 {
                     int pieceToUse = Random.Range(0,newBoard.Count);
                     int maxIterations = 0;
