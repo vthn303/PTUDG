@@ -20,10 +20,11 @@ MonoBehaviour:
   - {fileID: 1364584591137210144, guid: 157c20d8d02e1e54181a41f17a007819, type: 3}
   - {fileID: 652032001863089058, guid: 0a5d2bf6e1868d343af2340331a54cb4, type: 3}
   - {fileID: 141414995255498119, guid: 9c743b408a40b39428467ad1aa3e43fe, type: 3}
-  scoreGoals: 640000009001000058020000
+  - {fileID: 2139158891545884870, guid: 887cdf476df5cfd4583d02c9aee9448f, type: 3}
+  scoreGoals: 900100005802000020030000
   endGameRequirements:
-    gameType: 0
-    couterValue: 60
+    gameType: 1
+    counterValue: 50
   levelGoals:
   - numberNeeded: 10
     numberCollected: 0

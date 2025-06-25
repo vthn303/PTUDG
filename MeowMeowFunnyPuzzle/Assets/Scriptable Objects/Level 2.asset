@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8135fefb5af8e4eb2231c3900cec8e, type: 3}
   m_Name: Level 2
   m_EditorClassIdentifier: 
-  width: 8
-  height: 9
+  width: 7
+  height: 7
   boardLayout:
   - x: 3
     y: 3
-    tileKind: 3
+    tileKind: 4
   - x: 3
     y: 4
-    tileKind: 3
+    tileKind: 4
   - x: 4
     y: 3
-    tileKind: 3
+    tileKind: 4
   - x: 4
     y: 4
-    tileKind: 3
+    tileKind: 4
   dots:
   - {fileID: 652032001863089058, guid: 0a5d2bf6e1868d343af2340331a54cb4, type: 3}
   - {fileID: 141414995255498119, guid: 9c743b408a40b39428467ad1aa3e43fe, type: 3}
@@ -35,14 +35,14 @@ MonoBehaviour:
   - {fileID: 6489088544917093527, guid: e07f2048237d62f46a6774c9862db074, type: 3}
   scoreGoals: e803000088130000581b0000
   endGameRequirements:
-    gameType: 1
-    couterValue: 100
+    gameType: 0
+    counterValue: 10
   levelGoals:
-  - numberNeeded: 2
-    numberCollected: 0
-    goalSprite: {fileID: 268603036911594676, guid: 009a4a7009781414c8c67d86a7709567, type: 3}
-    matchValue: Cat3
   - numberNeeded: 5
-    numberCollected: 4
-    goalSprite: {fileID: 2848517285599912367, guid: 7bca24b0223cd1d44b713ba0f91ce833, type: 3}
-    matchValue: Breakable
+    numberCollected: 0
+    goalSprite: {fileID: -7854877495537926701, guid: 8753f1e6b8ee95c4186d2a764fb506e1, type: 3}
+    matchValue: Cat7
+  - numberNeeded: 5
+    numberCollected: 0
+    goalSprite: {fileID: 4789422596822793615, guid: 60d7e51ab8014d546983e5c1744f64a6, type: 3}
+    matchValue: Cat4

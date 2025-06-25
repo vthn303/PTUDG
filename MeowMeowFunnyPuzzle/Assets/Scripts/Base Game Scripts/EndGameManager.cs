@@ -1,8 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; 
-
+using UnityEngine.UI;
 
 public enum GameType
 {
@@ -14,31 +13,34 @@ public enum GameType
 public class EndGameRequirements
 {
     public GameType gameType;
-    public int couterValue;
+    public int counterValue;
 }
 
 public class EndGameManager : MonoBehaviour
 {
 
-    public EndGameRequirements requirements;
-    public GameObject movesLabel, timeLabel;
+
+    public GameObject movesLabel;
+    public GameObject timeLabel;
     public GameObject youWinPanel;
     public GameObject tryAgainPanel;
     public Text counter;
-    public int currentCouterValue;
+    public EndGameRequirements requirements;
+    public int currentCounterValue;
     private Board board;
     private float timerSeconds;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    // Use this for initialization
     void Start()
     {
         board = FindObjectOfType<Board>();
         SetGameType();
         SetupGame();
-        
     }
+
     void SetGameType()
     {
-        if(board.world != null)
+        if (board.world != null)
         {
             if (board.level < board.world.levels.Length)
             {
@@ -47,14 +49,13 @@ public class EndGameManager : MonoBehaviour
                     requirements = board.world.levels[board.level].endGameRequirements;
                 }
             }
-
-                
         }
     }
 
     void SetupGame()
     {
-        currentCouterValue = requirements.couterValue;
+
+        currentCounterValue = requirements.counterValue;
         if (requirements.gameType == GameType.Moves)
         {
             movesLabel.SetActive(true);
@@ -66,23 +67,20 @@ public class EndGameManager : MonoBehaviour
             movesLabel.SetActive(false);
             timeLabel.SetActive(true);
         }
-        counter.text = "" + currentCouterValue;
+        counter.text = "" + currentCounterValue;
     }
-
 
     public void DecreaseCounterValue()
     {
-        if(board.currentState != GameState.pause)
+        if (board.currentState != GameState.pause)
         {
-            currentCouterValue--;
-            counter.text = "" + currentCouterValue;
-            if (currentCouterValue <= 0)
+            currentCounterValue--;
+            counter.text = "" + currentCounterValue;
+            if (currentCounterValue <= 0)
             {
                 LoseGame();
             }
-
         }
-        
 
     }
 
@@ -90,31 +88,30 @@ public class EndGameManager : MonoBehaviour
     {
         youWinPanel.SetActive(true);
         board.currentState = GameState.win;
-        currentCouterValue = 0;
-        counter.text = "" + currentCouterValue;
+        currentCounterValue = 0;
+        counter.text = "" + currentCounterValue;
         FadePanelController fade = FindObjectOfType<FadePanelController>();
         fade.GameOver();
-
     }
 
     public void LoseGame()
     {
         tryAgainPanel.SetActive(true);
         board.currentState = GameState.lose;
-        Debug.Log("Lose");
-        currentCouterValue = 0;
-        counter.text = "" + currentCouterValue;
+        Debug.Log("You Lose!");
+        currentCounterValue = 0;
+        counter.text = "" + currentCounterValue;
         FadePanelController fade = FindObjectOfType<FadePanelController>();
         fade.GameOver();
-
     }
+
     // Update is called once per frame
     void Update()
     {
-        if(requirements.gameType == GameType.Time && currentCouterValue > 0)
+        if (requirements.gameType == GameType.Time && currentCounterValue > 0)
         {
             timerSeconds -= Time.deltaTime;
-            if(timerSeconds <= 0)
+            if (timerSeconds <= 0)
             {
                 DecreaseCounterValue();
                 timerSeconds = 1;

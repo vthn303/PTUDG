@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -33,28 +33,29 @@ public class GoalManager : MonoBehaviour
 
     void GetGoals()
     {
-        if(board != null)
+        if (board != null)
         {
-            if(board.world != null)
+            if (board.world != null)
             {
                 if (board.level < board.world.levels.Length)
                 {
                     if (board.world.levels[board.level] != null)
                     {
                         levelGoals = board.world.levels[board.level].levelGoals;
-                        for (int i = 0; i < levelGoals.Length; i++) {
+                        for (int i = 0; i < levelGoals.Length; i++)
+                        {
                             levelGoals[i].numberCollected = 0;
                         }
                     }
 
                 }
-                   
+
             }
         }
     }
     void SetupGoals()
     {
-        for(int i = 0; i < levelGoals.Length; i++)
+        for (int i = 0; i < levelGoals.Length; i++)
         {
             GameObject goal = Instantiate(goalPrefab, goalIntroParent.transform.position, Quaternion.identity);
             goal.transform.SetParent(goalIntroParent.transform, false);
@@ -67,7 +68,7 @@ public class GoalManager : MonoBehaviour
             gameGoal.transform.SetParent(goalGameParent.transform, false);
 
             panel = gameGoal.GetComponent<GoalPanel>();
-            currentGoals.Add(panel);   
+            currentGoals.Add(panel);
             panel.thisSprite = levelGoals[i].goalSprite;
             panel.thisString = "0/" + levelGoals[i].numberNeeded;
 
@@ -76,7 +77,7 @@ public class GoalManager : MonoBehaviour
     public void UpdateGoals()
     {
         int goalsComplete = 0;
-        for(int i = 0; i < levelGoals.Length; i++)
+        for (int i = 0; i < levelGoals.Length; i++)
         {
             currentGoals[i].thisText.text = "" + levelGoals[i].numberCollected + "/" + levelGoals[i].numberNeeded;
             if (levelGoals[i].numberCollected >= levelGoals[i].numberNeeded)
@@ -87,24 +88,25 @@ public class GoalManager : MonoBehaviour
 
         }
 
-        if(goalsComplete >= levelGoals.Length)
+        if (goalsComplete >= levelGoals.Length)
         {
-            if(endGame != null)
+            if (endGame != null)
             {
                 endGame.WinGame();
             }
-            Debug.Log("Win"); 
+            Debug.Log("Win");
         }
     }
 
     public void CompareGoal(string goalToCompare)
     {
-        for(int i = 0; i < levelGoals.Length; i++)
+        for (int i = 0; i < levelGoals.Length; i++)
         {
-            if(goalToCompare == levelGoals[i].matchValue)
+            if (goalToCompare == levelGoals[i].matchValue)
             {
                 levelGoals[i].numberCollected++;
             }
         }
     }
+
 }

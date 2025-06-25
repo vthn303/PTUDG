@@ -36,23 +36,42 @@ public class LevelButton : MonoBehaviour
 
     void LoadData()
     {
-        if(gameData != null)
+        if (gameData != null && gameData.saveData != null)
         {
-            // decide if the level is active
-            if (gameData.saveData.isActive[level - 1])
+            // Kiểm tra bounds trước khi truy cập array
+            if (gameData.saveData.isActive != null &&
+                level > 0 &&
+                level - 1 < gameData.saveData.isActive.Length)
             {
-                isActive = true;
-
+                isActive = gameData.saveData.isActive[level - 1];
             }
             else
             {
-                isActive = false;
+                isActive = (level == 1); // Chỉ level 1 mở sẵn
+                //Debug.LogWarning("Level " + level + " is out of bounds or data not initialized");
             }
 
-            //decide how many stars to active
-            starsActive = gameData.saveData.stars[level - 1];
+            // Kiểm tra bounds cho stars array
+            if (gameData.saveData.stars != null &&
+                level > 0 &&
+                level - 1 < gameData.saveData.stars.Length)
+            {
+                starsActive = gameData.saveData.stars[level - 1];
+            }
+            else
+            {
+                starsActive = 0;
+            }
+        }
+        else
+        {
+            // Fallback nếu GameData chưa sẵn sàng
+            isActive = (level == 1);
+            starsActive = 0;
+            //Debug.LogWarning("GameData not found or not initialized");
         }
     }
+
 
     void ActiveStars()
     {
